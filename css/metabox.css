@@ -1,0 +1,15 @@
+
+#settings-revision-options.postbox table {
+	width: 100%;
+}
+#settings-revision-options.postbox thead .id {
+}
+#settings-revision-options.postbox tbody .id {
+	text-align: right;
+}
+#settings-revision-options.postbox tbody .value {
+	font-family: monospace;
+}
+#settings-revision-options.postbox tbody pre {
+	margin: 0;
+}

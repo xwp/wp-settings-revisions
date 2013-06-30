@@ -133,7 +133,7 @@ class MetaControl extends \WP_Customize_Control {
 			<p class="field comment">
 				<label>
 					<span class="customize-control-title"><?php echo esc_html_e( 'Comment:', TEXT_DOMAIN ); ?></span>
-					<span class="customize-control-content"><input type="text" class="value" value="<?php echo esc_attr($active_post ? get_the_title($active_post) : '') ?>" title="<?php esc_attr_e( 'Provide a descriptive note about this revision', TEXT_DOMAIN ) ?>"></span>
+					<span class="customize-control-content"><input type="text" class="value" value="<?php echo esc_attr($active_post ? get_the_title($active_post) : '') ?>" title="<?php esc_attr_e( 'Provide a descriptive note about this revision', TEXT_DOMAIN ) ?>" maxlength="65535"></span>
 				</label>
 			</p>
 		</div>

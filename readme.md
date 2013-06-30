@@ -7,7 +7,7 @@ Keep revisions of changes to your settings, now specifically those exposed in Th
 **Requires at least:** 3.5  
 **Tested up to:**      3.6-beta3  
 **Stable tag:**        trunk  
-**License:**           [http://www.gnu.org/licenses/gpl-2.0.html](GPLv2) or later  
+**License:**           [GPLv2](http://www.gnu.org/licenses/gpl-2.0.html) or later  
 
 ## Description
 

@@ -1,9 +1,9 @@
 === Settings Revisions ===
 Contributors:      x-team, westonruter
-Tags:              customizer, options, settings, thememods, revisions
+Tags:              customizer, options, settings, theme-mods, revisions
 Requires at least: 3.5
 Tested up to:      3.6-beta3
-Stable tag:        0.1.0
+Stable tag:        trunk
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,6 +16,18 @@ Development of plugin is done on GitHub: https://github.com/x-team/wp-settings-r
 Pull requests welcome.
 
 Requires PHP 5.3!
+
+== Screenshots ==
+
+1. Collapsed customizer section
+2. Expanded customizer section
+3. Open dropdown of revisions
+4. Change setting starts new revision
+5. Revision select during save
+6. New revision prepended to list
+7. Selecting previous revision loads old settings into customizer for preview before saving
+8. Confirmation when restoring revision atop unsaved changes
+
 
 == Changelog ==
 

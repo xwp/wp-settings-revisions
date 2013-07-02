@@ -86,7 +86,9 @@ function _settings_revisions_boot( $options = array() ) {
 	// Define plugin constants in the namespace
 	$ns = 'SettingsRevisions';
 	define( $ns . '\NS', $ns );
-	define( $ns . '\PLUGIN_FILE', __FILE__ );
+	$file = WP_PLUGIN_DIR . '/' . basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ );
+	define( $ns . '\PLUGIN_FILE', $file );
+	define( $ns . '\PLUGIN_DIR', dirname( $file ) );
 	define( $ns . '\SLUG', basename( __FILE__, '.php' ) );
 	define( $ns . '\TEXT_DOMAIN', basename( __FILE__, '.php' ) );
 

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Make sure the readme.md never gets out of sync with the readme.txt
+bin/generate-markdown-readme
+git add readme.md

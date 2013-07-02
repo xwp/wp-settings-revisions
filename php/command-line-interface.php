@@ -11,7 +11,8 @@ class CommandLineInterface {
 			$this->$key = $value;
 		}
 
-		CliCommand::$plugin_instance = $this->plugin;
-		\WP_CLI::add_command( SLUG, NS_PREFIX . 'CliCommand' );
+		// @todo Add some useful commands
+		//CliCommand::$plugin_instance = $this->plugin;
+		//\WP_CLI::add_command( SLUG, NS_PREFIX . 'CliCommand' );
 	}
 }

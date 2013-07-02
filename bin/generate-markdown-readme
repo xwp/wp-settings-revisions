@@ -8,7 +8,9 @@ try {
 
 	$readme = new \SettingsRevisions\ReadmeParser( array( 'path' => $readme_txt_path ) );
 
-	$markdown = $readme->to_markdown();
+	$markdown = $readme->to_markdown( array(
+		'travis_ci_url' => preg_replace( '/^.+?:(.+)\.git$/', 'https://travis-ci.org/$1', trim(`git config --get remote.origin.url`) ),
+	) );
 
 	$is_written = file_put_contents( $readme_md_path, $markdown );
 	if ( ! $is_written ) {

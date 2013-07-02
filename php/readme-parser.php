@@ -1,4 +1,9 @@
 <?php
+/**
+ * Lightweight WordPress readme.txt parser and converter to Markdown
+ * The WordPress-Plugin-Readme-Parser project is too heavy and has too many dependencies for what we need.
+ * See: https://github.com/markjaquith/WordPress-Plugin-Readme-Parser
+ */
 
 namespace SettingsRevisions;
 
@@ -71,12 +76,15 @@ class ReadmeParser {
 	 * Convert the parsed readme.txt into Markdown
 	 * @return string
 	 */
-	function to_markdown() {
+	function to_markdown( $params = array() ) {
 
 		// Parse sections
 		$section_formatters = array(
-			'Description' => function ( $body ) {
-				return $body . "\n\n[![Build Status](https://travis-ci.org/x-team/wp-settings-revisions.png)](https://travis-ci.org/x-team/wp-settings-revisions)";
+			'Description' => function ( $body ) use ( $params ) {
+				if ( isset( $params['travis_ci_url'] ) ) {
+					$body .= sprintf( "\n\n[![Build Status](%s.png)](%s)", $params['travis_ci_url'], $params['travis_ci_url'] );
+				}
+				return $body;
 			},
 			'Screenshots' => function ( $body ) {
 				$body = trim( $body );

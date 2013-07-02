@@ -11,7 +11,7 @@ Keep revisions of changes to your settings, now specifically those exposed in Th
 
 == Description ==
 
-Development of plugin is done on GitHub: https://github.com/x-team/wp-settings-revisions
+Development of plugin is done on GitHub: [https://github.com/x-team/wp-settings-revisions](https://github.com/x-team/wp-settings-revisions)
 
 Pull requests welcome.
 
@@ -27,7 +27,6 @@ Requires PHP 5.3!
 6. New revision prepended to list
 7. Selecting previous revision loads old settings into customizer for preview before saving
 8. Confirmation when restoring revision atop unsaved changes
-
 
 == Changelog ==
 

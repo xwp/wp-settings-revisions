@@ -31,7 +31,6 @@
 
 global $settings_revisions_plugin;
 
-
 /**
  * Activation handler wrapper
  */
@@ -85,7 +84,7 @@ function _settings_revisions_boot( $options = array() ) {
 
 	// Define plugin constants in the namespace
 	$ns = 'SettingsRevisions';
-	define( $ns . '\NS', $ns );
+	define( $ns . '\NS_PREFIX', '\\' . $ns . '\\' );
 	$file = WP_PLUGIN_DIR . '/' . basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ );
 	define( $ns . '\PLUGIN_FILE', $file );
 	define( $ns . '\PLUGIN_DIR', dirname( $file ) );

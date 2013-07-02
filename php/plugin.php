@@ -7,6 +7,7 @@ class Plugin {
 	const READY_ACTION_NAME = 'settings_revisions_plugin_loaded';
 	public $post_type;
 	public $customizer_integration;
+	public $cli;
 
 	/**
 	 *
@@ -18,12 +19,14 @@ class Plugin {
 
 		$this->upgrade();
 
-		$this->post_type = new PostType(array(
+		$args = array(
 			'plugin' => $this,
-		));
-		$this->customizer_integration = new CustomizerIntegration(array(
-			'plugin' => $this,
-		));
+		);
+		$this->post_type = new PostType($args);
+		$this->customizer_integration = new CustomizerIntegration($args);
+		if ( defined('WP_CLI') && WP_CLI ) {
+			$this->cli = new CommandLineInterface($args);
+		}
 		// @todo This is not currently applicable because we don't support pending or future revisions
 		//$this->settings_filtering = new SettingsFiltering(array(
 		//	'plugin' => $this,

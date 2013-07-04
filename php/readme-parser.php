@@ -95,7 +95,7 @@ class ReadmeParser {
 					$screenshot_name = $screenshot_match[1];
 					$new_body .= sprintf( "### %s\n", $screenshot_name );
 					$new_body .= "\n";
-					$new_body .= sprintf( "![%s](screenshot-%d.png)\n", $screenshot_name, $i + 1 );
+					$new_body .= sprintf( "![%s](assets/screenshot-%d.png)\n", $screenshot_name, $i + 1 );
 					$new_body .= "\n";
 				}
 				return $new_body;

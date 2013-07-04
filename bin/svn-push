@@ -12,7 +12,10 @@ fi
 
 git_root=$(pwd)
 
-git checkout master
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+if [ $current_branch != 'master' ]; then
+	git checkout master
+fi
 git pull
 svn_url=https://plugins.svn.wordpress.org/settings-revisions/
 svn_repo_dir=$git_root/svn
@@ -35,6 +38,10 @@ cat <(
 	git ls-files --cached --full-name $git_root | xargs -I {} dirname {} | sort | uniq
 ) | sort | rsync -avz --delete --include-from=- --exclude='*' $git_root/ ./
 
+# move assets directory to proper location in SVN
+rsync -avz --delete ./assets/ ../assets/
+rm -r ./assets/
+
 # convert .gitignores to svn:ignore
 for gitignore in $(find . -name .gitignore); do
 	echo "Convert $gitignore to svn:global-ignores"
@@ -42,10 +49,15 @@ for gitignore in $(find . -name .gitignore); do
 	svn rm --force $gitignore
 done
 
-
+# Delete any files from SVN that are no longer there
 svn status . | grep "^\!" | sed 's/^\! *//g' | xargs svn rm
-svn add --force .
 
+# Add everything left to commit
+cd $svn_repo_dir
+svn add --force assets
+svn add --force trunk
+
+# Do SVN commit
 svn_commit_file=$svn_repo_dir/COMMIT_MSG
 
 git log -1 --format="Update to commit %h from $(git config --get remote.origin.url)" > $svn_commit_file
@@ -64,8 +76,11 @@ else
 	git log $git_log_args $last_pushed_commit..HEAD >> $svn_commit_file
 fi
 
-cd $svn_repo_dir
 
 svn commit -F $svn_commit_file
-
 rm $svn_commit_file
+
+# Restore branch
+if [ $current_branch != 'master' ]; then
+	git checkout $current_branch
+fi

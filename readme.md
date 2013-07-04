@@ -24,35 +24,35 @@ Requires PHP 5.3!
 
 ### Collapsed customizer section
 
-![Collapsed customizer section](screenshot-1.png)
+![Collapsed customizer section](assets/screenshot-1.png)
 
 ### Expanded customizer section
 
-![Expanded customizer section](screenshot-2.png)
+![Expanded customizer section](assets/screenshot-2.png)
 
 ### Open dropdown of revisions
 
-![Open dropdown of revisions](screenshot-3.png)
+![Open dropdown of revisions](assets/screenshot-3.png)
 
 ### Change setting starts new revision
 
-![Change setting starts new revision](screenshot-4.png)
+![Change setting starts new revision](assets/screenshot-4.png)
 
 ### Revision select during save
 
-![Revision select during save](screenshot-5.png)
+![Revision select during save](assets/screenshot-5.png)
 
 ### New revision prepended to list
 
-![New revision prepended to list](screenshot-6.png)
+![New revision prepended to list](assets/screenshot-6.png)
 
 ### Selecting previous revision loads old settings into customizer for preview before saving
 
-![Selecting previous revision loads old settings into customizer for preview before saving](screenshot-7.png)
+![Selecting previous revision loads old settings into customizer for preview before saving](assets/screenshot-7.png)
 
 ### Confirmation when restoring revision atop unsaved changes
 
-![Confirmation when restoring revision atop unsaved changes](screenshot-8.png)
+![Confirmation when restoring revision atop unsaved changes](assets/screenshot-8.png)
 
 ## Changelog ##
 

@@ -36,7 +36,7 @@ cat <(
 	git ls-files --cached --full-name $git_root \
 	&
 	git ls-files --cached --full-name $git_root | xargs -I {} dirname {} | sort | uniq
-) | sort | rsync -avz --delete --include-from=- --exclude='*' $git_root/ ./
+) | sort | rsync -avz --delete --delete-excluded --include-from=- --exclude='*' $git_root/ ./
 
 # move assets directory to proper location in SVN
 rsync -avz --delete ./assets/ ../assets/
@@ -49,11 +49,12 @@ for gitignore in $(find . -name .gitignore); do
 	svn rm --force $gitignore
 done
 
+cd $svn_repo_dir
+
 # Delete any files from SVN that are no longer there
 svn status . | grep "^\!" | sed 's/^\! *//g' | xargs svn rm
 
 # Add everything left to commit
-cd $svn_repo_dir
 svn add --force assets
 svn add --force trunk
 

@@ -106,6 +106,7 @@ class ReadmeParser {
 		$formatted_metadata = $this->metadata;
 		$formatted_metadata['Contributors'] = join(', ', array_map(
 			function ( $contributor ) {
+				$contributor = strtolower( $contributor );
 				// @todo Map to GitHub account
 				return sprintf( '[%1$s](http://profiles.wordpress.org/%1$s)', $contributor );
 			},

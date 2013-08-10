@@ -35,8 +35,8 @@ global $settings_revisions_plugin;
  * Activation handler wrapper
  */
 function _settings_revisions_activate_wrapper() {
-	_settings_revisions_boot(array(
-		'activation' => true,
+	_settings_revisions_boot( array(
+		'activation'      => true,
 		'activation_args' => func_get_args(),
 	));
 }
@@ -48,7 +48,7 @@ register_activation_hook( __FILE__, '_settings_revisions_activate_wrapper' );
  */
 function _settings_revisions_check_php_version( $die = false ) {
 	$required_version = '5.3';
-	$is_old_version = version_compare( PHP_VERSION, $required_version, '<' );
+	$is_old_version   = version_compare( PHP_VERSION, $required_version, '<' );
 	if ( $is_old_version ) {
 		$error_message = sprintf(
 			__( 'Sorry, the Settings Revisions plugin requires PHP %2s+, but your server is currently running PHP %3s, Please bug your host to upgrade to a recent version of PHP which is less bug-prone.', 'setting-revisions' ),
@@ -70,8 +70,8 @@ function _settings_revisions_check_php_version( $die = false ) {
 function _settings_revisions_boot( $options = array() ) {
 	global $settings_revisions_plugin;
 
-	extract(wp_parse_args($options, array(
-		'activation' => false,
+	extract( wp_parse_args( $options, array(
+		'activation'      => false,
 		'activation_args' => array(),
 	)));
 
@@ -83,7 +83,7 @@ function _settings_revisions_boot( $options = array() ) {
 	}
 
 	// Define plugin constants in the namespace
-	$ns = 'SettingsRevisions';
+	$ns = 'Settings_Revisions';
 	define( $ns . '\NS_PREFIX', '\\' . $ns . '\\' );
 	$file = WP_PLUGIN_DIR . '/' . basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ );
 	define( $ns . '\PLUGIN_FILE', $file );
@@ -93,12 +93,12 @@ function _settings_revisions_boot( $options = array() ) {
 
 	// Register autoload handler for this plugin's classes and initialize plugin class
 	spl_autoload_register( '_settings_revisions_autoload' );
-	$class_name = $ns . '\Plugin'; // to prevent fatal syntax error
+	$class_name                = $ns . '\Plugin'; // to prevent fatal syntax error
 	$settings_revisions_plugin = new $class_name();
 
 	// Because the constructor's register_activate_hook was called too late
 	if ( $activation ) {
-		call_user_func_array( array( $settings_revisions_plugin, 'activate' ), $activation_args);
+		call_user_func_array( array( $settings_revisions_plugin, 'activate' ), $activation_args );
 		remove_action( 'plugins_loaded', '_settings_revisions_boot' );
 	}
 
@@ -111,9 +111,9 @@ add_action( 'plugins_loaded', '_settings_revisions_boot' );
  * spl_autoload_register handler
  */
 function _settings_revisions_autoload( $class_name ) {
-	if ( preg_match('/^SettingsRevisions\\\\(.+)/', $class_name, $matches) ) {
+	if ( preg_match( '/^Settings_Revisions\\\\(.+)/', $class_name, $matches ) ) {
 		$class_name = $matches[1];
-		$file_basename = strtolower(preg_replace('/(?<=[a-z])(?=[A-Z])/', '-', $class_name));
+		$file_basename = strtolower( str_ireplace( '_', '-', $class_name ) );
 		require_once __DIR__ . '/php/' . $file_basename . '.php';
 	}
 }

@@ -21,9 +21,9 @@ class Post_Type {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 
 		$this->l10n = array(
-			'sole_authorship_label' => __( 'by %1$s', TEXT_DOMAIN ),
-			'dual_authorship_label' => __( 'by %1$s w/ %2$s', TEXT_DOMAIN ),
-			'revision_option_text'  => __( '{date} {time} {author}: {comment}', TEXT_DOMAIN ),
+			'sole_authorship_label' => __( 'by %1$s', 'settings-revisions' ),
+			'dual_authorship_label' => __( 'by %1$s w/ %2$s', 'settings-revisions' ),
+			'revision_option_text'  => __( '{date} {time} {author}: {comment}', 'settings-revisions' ),
 			// @todo Pending and Future option texts
 		);
 	}
@@ -39,8 +39,8 @@ class Post_Type {
 				'show_ui'              => true,
 				'show_in_menu'         => true,
 				'show_in_admin_bar'    => false,
-				'label'                => __( 'Settings Revisions', TEXT_DOMAIN ),
-				'description'          => __( 'Snapshot of settings at a point in time.', TEXT_DOMAIN ),
+				'label'                => __( 'Settings Revisions', 'settings-revisions' ),
+				'description'          => __( 'Snapshot of settings at a point in time.', 'settings-revisions' ),
 				'labels'               => array(),
 				'supports'             => array(
 					'title',
@@ -195,7 +195,7 @@ class Post_Type {
 	function add_meta_box() {
 		add_meta_box(
 			self::META_BOX_ID,
-			__( 'Settings Snapshot', TEXT_DOMAIN ),
+			__( 'Settings Snapshot', 'settings-revisions' ),
 			array( $this, '_meta_box_callback' ),
 			self::SLUG,
 			'normal',
@@ -210,15 +210,15 @@ class Post_Type {
 		$settings = $this->get_revision_settings( $post );
 		?>
 		<?php if ( empty( $settings ) ) : ?>
-			<p><em><?php esc_html_e( 'No settings were stored with this revision.', TEXT_DOMAIN ) ?></em></p>
+			<p><em><?php esc_html_e( 'No settings were stored with this revision.', 'settings-revisions' ) ?></em></p>
 			<?php return; ?>
 		<?php endif; ?>
 
 		<table>
 			<thead>
-				<th class="id" scope="col"><?php esc_html_e( 'ID', TEXT_DOMAIN ) ?></th>
-				<th class="type" scope="col"><?php esc_html_e( 'Type', TEXT_DOMAIN ) ?></th>
-				<th class="value" scope="col"><?php esc_html_e( 'Value', TEXT_DOMAIN ) ?></th>
+				<th class="id" scope="col"><?php esc_html_e( 'ID', 'settings-revisions' ) ?></th>
+				<th class="type" scope="col"><?php esc_html_e( 'Type', 'settings-revisions' ) ?></th>
+				<th class="value" scope="col"><?php esc_html_e( 'Value', 'settings-revisions' ) ?></th>
 			</thead>
 			<tbody>
 				<?php foreach ( $settings as $setting ) : ?>

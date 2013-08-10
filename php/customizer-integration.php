@@ -48,7 +48,7 @@ class Customizer_Integration {
 
 		$section_name = 'settings-revisions';
 		$wp_customize->add_section( $section_name, array(
-			'title'    => __( 'Settings Revisions', TEXT_DOMAIN ),
+			'title'    => __( 'Settings Revisions', 'settings-revisions' ),
 			'priority' => 1,
 		) );
 

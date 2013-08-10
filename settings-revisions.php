@@ -89,7 +89,6 @@ function _settings_revisions_boot( $options = array() ) {
 	define( $ns . '\PLUGIN_FILE', $file );
 	define( $ns . '\PLUGIN_DIR', dirname( $file ) );
 	define( $ns . '\SLUG', basename( __FILE__, '.php' ) );
-	define( $ns . '\TEXT_DOMAIN', basename( __FILE__, '.php' ) );
 
 	// Register autoload handler for this plugin's classes and initialize plugin class
 	spl_autoload_register( '_settings_revisions_autoload' );

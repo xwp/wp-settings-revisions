@@ -41,8 +41,8 @@ class Meta_Control extends \WP_Customize_Control {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 
 		$this->l10n = array(
-			'confirm_dialog'         => __( 'You have unsaved changed. Do you want to override them with the restored snapshot?', TEXT_DOMAIN ),
-			'new_option_text_format' => __( '(Modified) %s', TEXT_DOMAIN ),
+			'confirm_dialog'         => __( 'You have unsaved changed. Do you want to override them with the restored snapshot?', 'settings-revisions' ),
+			'new_option_text_format' => __( '(Modified) %s', 'settings-revisions' ),
 		);
 	}
 
@@ -92,13 +92,13 @@ class Meta_Control extends \WP_Customize_Control {
 		?>
 
 		<label>
-			<span class="customize-control-title"><?php echo esc_html_e( 'Active Revision:', TEXT_DOMAIN ) ?></span>
+			<span class="customize-control-title"><?php echo esc_html_e( 'Active Revision:', 'settings-revisions' ) ?></span>
 			<select class="active">
 				<?php $options = $this->plugin->post_type->get_dropdown_contents( $query_vars ) ?>
 				<?php if ( $options ) : ?>
 					<?php echo $options; ?>
 				<?php else : ?>
-					<option value=""><?php esc_html_e( 'Default Settings', TEXT_DOMAIN ) ?></option>
+					<option value=""><?php esc_html_e( 'Default Settings', 'settings-revisions' ) ?></option>
 				<?php endif; ?>
 			</select>
 		</label>
@@ -110,21 +110,21 @@ class Meta_Control extends \WP_Customize_Control {
 			<p class="field is_pending">
 				<label>
 					<input type="checkbox" class="value" <?php checked( ! $can_publish_settings ) ?> <?php disabled( ! $can_publish_settings ) ?>>
-					<span><?php echo esc_html_e( 'Save settings revision as pending review', TEXT_DOMAIN ) ?></span>
+					<span><?php echo esc_html_e( 'Save settings revision as pending review', 'settings-revisions' ) ?></span>
 				</label>
 			</p>
 			<p class="field scheduled_date">
 				<label>
 					<input type="checkbox">
-					<span class="if-unchecked"><?php echo esc_html_e( 'Schedule settings for activation', TEXT_DOMAIN ) ?></span>
-					<span class="if-checked" hidden><?php echo esc_html_e( 'Date scheduled for activation:', TEXT_DOMAIN ) ?></span>
+					<span class="if-unchecked"><?php echo esc_html_e( 'Schedule settings for activation', 'settings-revisions' ) ?></span>
+					<span class="if-checked" hidden><?php echo esc_html_e( 'Date scheduled for activation:', 'settings-revisions' ) ?></span>
 				</label>
 				<span class="customize-control-content if-checked">
 					<input
 						type="datetime-local"
 						class="value"
 						min="<?php // Not behaving properly in Chrome: echo esc_attr( str_replace( ' ', 'T', current_time( 'mysql' ) ) ) ?>"
-						title="<?php esc_attr_e( 'Enter the future date for when the settings should be applied.', TEXT_DOMAIN ) ?>">
+						title="<?php esc_attr_e( 'Enter the future date for when the settings should be applied.', 'settings-revisions' ) ?>">
 				</span>
 			</p>
 			*/
@@ -132,8 +132,8 @@ class Meta_Control extends \WP_Customize_Control {
 
 			<p class="field comment">
 				<label>
-					<span class="customize-control-title"><?php echo esc_html_e( 'Comment:', TEXT_DOMAIN ) ?></span>
-					<span class="customize-control-content"><input type="text" class="value" value="<?php echo esc_attr( $active_post ? get_the_title( $active_post ) : '' ) ?>" title="<?php esc_attr_e( 'Provide a descriptive note about this revision', TEXT_DOMAIN ) ?>" maxlength="65535"></span>
+					<span class="customize-control-title"><?php echo esc_html_e( 'Comment:', 'settings-revisions' ) ?></span>
+					<span class="customize-control-content"><input type="text" class="value" value="<?php echo esc_attr( $active_post ? get_the_title( $active_post ) : '' ) ?>" title="<?php esc_attr_e( 'Provide a descriptive note about this revision', 'settings-revisions' ) ?>" maxlength="65535"></span>
 				</label>
 			</p>
 		</div>

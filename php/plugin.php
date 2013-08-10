@@ -62,10 +62,10 @@ class Plugin {
 	 *
 	 */
 	function load_textdomain() {
-		$locale  = apply_filters( 'plugin_locale', get_locale(), TEXT_DOMAIN );
-		$mo_file = sprintf( '%s/%s/%s-%s.mo', \WP_LANG_DIR, TEXT_DOMAIN, TEXT_DOMAIN, $locale );
-		load_textdomain( TEXT_DOMAIN, $mo_file );
-		load_plugin_textdomain( TEXT_DOMAIN, false, dirname( plugin_basename( PLUGIN_FILE ) ) . trailingslashit( $this->get_meta_data( 'DomainPath' ) ) );
+		$locale  = apply_filters( 'plugin_locale', get_locale(), 'settings-revisions' );
+		$mo_file = sprintf( '%s/%s/%s-%s.mo', \WP_LANG_DIR, 'settings-revisions', 'settings-revisions', $locale );
+		load_textdomain( 'settings-revisions', $mo_file );
+		load_plugin_textdomain( 'settings-revisions', false, dirname( plugin_basename( PLUGIN_FILE ) ) . trailingslashit( $this->get_meta_data( 'DomainPath' ) ) );
 	}
 
 	/**

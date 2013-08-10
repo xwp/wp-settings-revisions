@@ -7,7 +7,7 @@
  * Author:      X-Team
  * Author URI:  http://x-team.com/
  * License:     GPLv2+
- * Text Domain: setting-revisions
+ * Text Domain: settings-revisions
  * Domain Path: /locale
  */
 
@@ -51,7 +51,7 @@ function _settings_revisions_check_php_version( $die = false ) {
 	$is_old_version   = version_compare( PHP_VERSION, $required_version, '<' );
 	if ( $is_old_version ) {
 		$error_message = sprintf(
-			__( 'Sorry, the Settings Revisions plugin requires PHP %2s+, but your server is currently running PHP %3s, Please bug your host to upgrade to a recent version of PHP which is less bug-prone.', 'setting-revisions' ),
+			__( 'Sorry, the Settings Revisions plugin requires PHP %2s+, but your server is currently running PHP %3s, Please bug your host to upgrade to a recent version of PHP which is less bug-prone.', 'settings-revisions' ),
 			$required_version,
 			PHP_VERSION
 		);

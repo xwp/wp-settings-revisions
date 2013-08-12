@@ -1,4 +1,4 @@
-/*global jQuery, wp, SettingsRevisionsMetaControl_exported */
+/*global jQuery, wp, SettingsRevisionsMetaControl_exported, confirm */
 
 var SettingsRevisionsMetaControl = (function ($) {
 	'use strict';
@@ -66,8 +66,8 @@ var SettingsRevisionsMetaControl = (function ($) {
 				has_mutated_since_snapshot_restore = false;
 				$.each(settings, function (key, value) {
 					var id = key.replace(/^(theme_mod|option)_/, '');
-					if (customize.control.has(id)) {
-						customize.control.value(id).setting(value);
+					if (wp.customize.has(id)) {
+						wp.customize.value(id)(value);
 					}
 				});
 				is_restoring_snapshot = false;

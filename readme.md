@@ -6,7 +6,7 @@ Keep revisions of changes to your settings, now specifically those exposed in Th
 **Contributors:** [x-team](http://profiles.wordpress.org/x-team), [westonruter](http://profiles.wordpress.org/westonruter)  
 **Tags:** [customizer](http://wordpress.org/plugins/tags/customizer), [options](http://wordpress.org/plugins/tags/options), [settings](http://wordpress.org/plugins/tags/settings), [theme-mods](http://wordpress.org/plugins/tags/theme-mods), [revisions](http://wordpress.org/plugins/tags/revisions)  
 **Requires at least:** 3.5  
-**Tested up to:** 3.6-beta3  
+**Tested up to:** 3.6  
 **Stable tag:** trunk (master)  
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
 
@@ -55,6 +55,9 @@ Requires PHP 5.3!
 ![Confirmation when restoring revision atop unsaved changes](assets/screenshot-8.png)
 
 ## Changelog ##
+
+### 0.1.2 ###
+Correct method for updating customizer, by updating settings not by updating controls.
 
 ### 0.1.1 ###
 Eliminate strict standards notice

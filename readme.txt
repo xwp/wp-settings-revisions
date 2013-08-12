@@ -2,7 +2,7 @@
 Contributors:      X-team, westonruter
 Tags:              customizer, options, settings, theme-mods, revisions
 Requires at least: 3.5
-Tested up to:      3.6-beta3
+Tested up to:      3.6
 Stable tag:        trunk
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
@@ -29,6 +29,9 @@ Requires PHP 5.3!
 8. Confirmation when restoring revision atop unsaved changes
 
 == Changelog ==
+
+= 0.1.2 =
+Correct method for updating customizer, by updating settings not by updating controls.
 
 = 0.1.1 =
 Eliminate strict standards notice

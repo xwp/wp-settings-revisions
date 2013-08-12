@@ -1,13 +1,13 @@
 <?php
 
-namespace SettingsRevisions;
+namespace Settings_Revisions;
 
-class CommandLineInterface {
+class Command_Line_Interface {
 	public $plugin = null;
 
 	function __construct( $args = array() ) {
 		$args = wp_parse_args( $args, get_object_vars( $this ) );
-		foreach ($args as $key => $value) {
+		foreach ( $args as $key => $value ) {
 			$this->$key = $value;
 		}
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace SettingsRevisions;
+namespace Settings_Revisions;
 
-class CustomizerIntegration {
+class Customizer_Integration {
 	public $plugin = null;
 	public $ajax_latest_dropdown_options_action = 'settings_revisions_latest_dropdown_options';
 
@@ -11,14 +11,14 @@ class CustomizerIntegration {
 	 */
 	function __construct( $args = array() ) {
 		$args = wp_parse_args( $args, get_object_vars( $this ) );
-		foreach ($args as $key => $value) {
+		foreach ( $args as $key => $value ) {
 			$this->$key = $value;
 		}
 
 		add_action( 'customize_register', array( $this, 'add_customizer_controls' ) );
 		add_action( 'customize_save', array( $this, 'on_customize_save' ) );
 
-		// We have to do this here and not in the MetaControl::__construct because it is not loaded on normal Ajax requests
+		// We have to do this here and not in the Meta_Control::__construct because it is not loaded on normal Ajax requests
 		add_action( 'wp_ajax_' . $this->ajax_latest_dropdown_options_action, array( $this, '_respond_ajax_latest_revisions' ) );
 	}
 
@@ -48,25 +48,25 @@ class CustomizerIntegration {
 
 		$section_name = 'settings-revisions';
 		$wp_customize->add_section( $section_name, array(
-			'title' => __( 'Settings Revisions', TEXT_DOMAIN ),
+			'title'    => __( 'Settings Revisions', 'settings-revisions' ),
 			'priority' => 1,
 		) );
 
 		$wp_customize->add_setting(
 			'settings_revision_meta',
 			array(
-				'default' => '',
+				'default'   => '',
 				'transport' => 'custom', // anything other than 'postMessage' or 'refresh'
-				'type' => 'custom', // not a theme_mod or an option
+				'type'      => 'custom', // not a theme_mod or an option
 			)
 		);
 		$wp_customize->add_control(
-			new MetaControl(
+			new Meta_Control(
 				$this->plugin,
 				$wp_customize,
 				'settings_revision_meta',
 				array(
-					'section' => $section_name,
+					'section'  => $section_name,
 					'settings' => 'settings_revision_meta',
 				)
 			)
@@ -82,7 +82,7 @@ class CustomizerIntegration {
 
 		$args = array(
 			// 'post_id' => $meta['post_id'], // @todo pending
-			'comment' => $meta['comment'],
+			'comment'  => $meta['comment'],
 			//'scheduled_date' => $meta['scheduled_date'], // @todo future
 			//'is_pending' => false, // @todo pending
 			'settings' => array(),
@@ -91,8 +91,8 @@ class CustomizerIntegration {
 		foreach ($manager->settings() as $setting) {
 			if ( in_array( $setting->type, array( 'theme_mod', 'option' ) ) ) {
 				$args['settings'][] = array(
-					'id' => $setting->id,
-					'type' => $setting->type,
+					'id'    => $setting->id,
+					'type'  => $setting->type,
 					'value' => $setting->post_value(),
 				);
 			}
@@ -101,7 +101,7 @@ class CustomizerIntegration {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public function _respond_ajax_latest_revisions() {
 		check_ajax_referer( $this->ajax_latest_dropdown_options_action, 'nonce' );

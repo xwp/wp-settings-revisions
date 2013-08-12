@@ -1,8 +1,8 @@
 <?php
 
-namespace SettingsRevisions;
+namespace Settings_Revisions;
 
-class SettingsFiltering {
+class Settings_Filtering {
 
 	public $plugin;
 

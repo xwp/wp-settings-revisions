@@ -71,13 +71,14 @@ class PostType {
 	 * @return array|null
 	 */
 	function get_active_post() {
-		return array_shift(get_posts(array(
+		$posts = get_posts( array(
 			'post_type' => self::SLUG,
 			'post_status' => 'publish',
 			'posts_per_page' => 1,
 			'orderby' => 'date',
 			'order' => 'DESC',
-		)));
+		) );
+		return array_shift( $posts );
 	}
 
 	/**

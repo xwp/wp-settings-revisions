@@ -16,7 +16,7 @@ class Meta_Control extends \WP_Customize_Control {
 	/**
 	 * @var string
 	 */
-	public $type = 'Settings_Revisions_Meta_Control';
+	public $type = 'SettingsRevisionsMetaControl';
 
 	/**
 	 * @var array
@@ -67,7 +67,7 @@ class Meta_Control extends \WP_Customize_Control {
 			array(),
 			$this->plugin->get_version()
 		);
-		wp_localize_script('settings-revisions-meta-control', 'Settings_Revisions_Meta_Control_exported', array(
+		wp_localize_script('settings-revisions-meta-control', 'SettingsRevisionsMetaControl_exported', array(
 			'l10n'                                     => $this->l10n,
 			'latest_revisions_dropdown_options_action' => $this->plugin->customizer_integration->ajax_latest_dropdown_options_action,
 			'latest_revisions_dropdown_options_nonce'  => wp_create_nonce( $this->plugin->customizer_integration->ajax_latest_dropdown_options_action ),

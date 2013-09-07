@@ -38,7 +38,7 @@ class Meta_Control extends \WP_Customize_Control {
 	public function __construct( Plugin $plugin, \WP_Customize_Manager $manager, $id, $args = array() ) {
 		$this->plugin = $plugin;
 		parent::__construct( $manager, $id, $args );
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
+		add_action( 'customize_controls_enqueue_scripts', array( $this, 'enqueue_deps' ) );
 
 		$this->l10n = array(
 			'confirm_dialog'         => __( 'You have unsaved changed. Do you want to override them with the restored snapshot?', 'settings-revisions' ),
@@ -49,12 +49,7 @@ class Meta_Control extends \WP_Customize_Control {
 	/**
 	 *
 	 */
-	function enqueue() {
-		$screen = get_current_screen();
-		if ( 'customize' !== $screen->base ) {
-			return;
-		}
-
+	function enqueue_deps() {
 		wp_enqueue_script(
 			'settings-revisions-meta-control',
 			$this->plugin->get_plugin_path_url( 'js/meta-control.js' ),

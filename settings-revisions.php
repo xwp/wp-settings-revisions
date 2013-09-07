@@ -3,7 +3,7 @@
  * Plugin Name: Settings Revisions
  * Plugin URI:  http://github.com/x-team/wp-settings-revisions
  * Description: Keep revisions of changes to your settings, including Theme Customizer changes. Allow rollbacks to previous revisions, and editorial flow publishing changes.
- * Version:     0.1.2
+ * Version:     0.1.3
  * Author:      X-Team
  * Author URI:  http://x-team.com/
  * License:     GPLv2+

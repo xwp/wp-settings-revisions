@@ -282,7 +282,7 @@ class Post_Type {
 		ob_start();
 		$settings = array();
 		foreach ( get_post_custom() as $key => $values ) {
-			$settings[$key] = array_shift( $values );
+			$settings[$key] = maybe_unserialize( array_shift( $values ) );
 		}
 		$author             = get_the_author();
 		$modified_author    = get_the_modified_author();

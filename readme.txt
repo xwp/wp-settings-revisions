@@ -30,6 +30,9 @@ Requires PHP 5.3!
 
 == Changelog ==
 
+= 0.1.3 =
+Fix handling of settings which contain PHP-serialized values; use `customize_controls_enqueue_scripts` action.
+
 = 0.1.2 =
 Correct method for updating customizer, by updating settings not by updating controls.
 

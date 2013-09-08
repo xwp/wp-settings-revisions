@@ -184,8 +184,8 @@ var SettingsRevisionsMetaControl = (function ($) {
 		}
 	});
 
-	// Note that 'SettingsRevisionsMetaControl' must match the PostType::$type
-	customize.controlConstructor.SettingsRevisionsMetaControl = self.constuctor;
+	// Note that 'settings_revisions_meta' must match the PostType::$type
+	customize.controlConstructor.settings_revisions_meta = self.constuctor;
 
 	return self;
 }(jQuery));

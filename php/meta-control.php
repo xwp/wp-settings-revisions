@@ -16,7 +16,7 @@ class Meta_Control extends \WP_Customize_Control {
 	/**
 	 * @var string
 	 */
-	public $type = 'SettingsRevisionsMetaControl';
+	public $type = 'settings_revisions_meta';
 
 	/**
 	 * @var array

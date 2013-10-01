@@ -11,11 +11,9 @@ Keep revisions of changes to your settings, now specifically those exposed in Th
 
 == Description ==
 
-Development of plugin is done on GitHub: [https://github.com/x-team/wp-settings-revisions](https://github.com/x-team/wp-settings-revisions)
+**Development of this plugin is done [on GitHub](https://github.com/x-team/wp-settings-revisions). Pull requests welcome. Please see [issues](https://github.com/x-team/wp-settings-revisions/issues) reported there before going to the plugin forum.**
 
-Pull requests welcome.
-
-Requires PHP 5.3!
+Currently requires PHP 5.3!
 
 == Screenshots ==
 

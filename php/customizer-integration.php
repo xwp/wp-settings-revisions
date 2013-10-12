@@ -1,8 +1,6 @@
 <?php
 
-namespace Settings_Revisions;
-
-class Customizer_Integration {
+class Settings_Revisions_Customizer_Integration {
 	public $plugin = null;
 	public $ajax_latest_dropdown_options_action = 'settings_revisions_latest_dropdown_options';
 
@@ -63,7 +61,7 @@ class Customizer_Integration {
 				'type'      => 'custom', // not a theme_mod or an option
 			)
 		);
-		$control = new Meta_Control(
+		$control = new Settings_Revisions_Meta_Control(
 			$this->plugin,
 			$wp_customize,
 			'settings_revision_meta',
@@ -79,7 +77,7 @@ class Customizer_Integration {
 	/**
 	 *
 	 */
-	function on_customize_save( \WP_Customize_Manager $manager ) {
+	function on_customize_save( WP_Customize_Manager $manager ) {
 		$meta = $manager->get_setting( 'settings_revision_meta' )->post_value();
 
 		$args = array(

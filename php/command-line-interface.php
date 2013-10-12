@@ -1,8 +1,6 @@
 <?php
 
-namespace Settings_Revisions;
-
-class Command_Line_Interface {
+class Settings_Revisions_Command_Line_Interface {
 	public $plugin = null;
 
 	function __construct( $args = array() ) {
@@ -12,7 +10,7 @@ class Command_Line_Interface {
 		}
 
 		// @todo Add some useful commands
-		//CliCommand::$plugin_instance = $this->plugin;
-		//\WP_CLI::add_command( SLUG, NS_PREFIX . 'CliCommand' );
+		//Settings_Revisions_Cli_Command::$plugin_instance = $this->plugin;
+		//WP_CLI::add_command( SETTINGS_REVISIONS_SLUG, 'Settings_Revisions_Cli_Command' );
 	}
 }

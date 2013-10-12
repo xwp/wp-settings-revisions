@@ -1,8 +1,6 @@
 <?php
 
-namespace Settings_Revisions;
-
-class Post_Type {
+class Settings_Revisions_Post_Type {
 	const SLUG        = 'settings-revision';
 	const META_BOX_ID = 'settings-revision-options';
 	public $plugin    = null;
@@ -239,11 +237,28 @@ class Post_Type {
 	}
 
 	/**
+	 * @param string $where
+	 * @param WP_Query $query
+	 *
+	 * @return string
+	 */
+	public function _filter_posts_where( $where, $query ) {
+		global $wpdb;
+		if ( $query->get( 'after_post_id' ) ) {
+			$where .= $wpdb->prepare( " AND $wpdb->posts.ID > %d", $query->get( 'after_post_id' ) );
+		}
+		if ( $query->get( 'before_post_id' ) ) {
+			$where .= $wpdb->prepare( " AND $wpdb->posts.ID < %d", $query->get( 'before_post_id' ) );
+		}
+		return $where;
+	}
+
+	/**
 	 * Get a list of <option> elements containing the settings-revision posts
 	 */
 	public function get_dropdown_contents( $query_vars = array() ) {
 		$defaults = array(
-			'post_type'      => Post_Type::SLUG,
+			'post_type'      => Settings_Revisions_Post_Type::SLUG,
 			'post_status'    => array( 'publish', ), // @todo pending and future
 			'after_post_id'  => null,
 			'before_post_id' => null,
@@ -252,19 +267,9 @@ class Post_Type {
 		);
 		$query_vars = wp_parse_args( $query_vars, $defaults );
 
-		$where_filter = function ( $where, $query ) {
-			global $wpdb;
-			if ( $query->get( 'after_post_id' ) ) {
-				$where .= $wpdb->prepare( " AND $wpdb->posts.ID > %d", $query->get( 'after_post_id' ) );
-			}
-			if ( $query->get( 'before_post_id' ) ) {
-				$where .= $wpdb->prepare( " AND $wpdb->posts.ID < %d", $query->get( 'before_post_id' ) );
-			}
-			return $where;
-		};
-
+		$where_filter = array( $this, '_filter_posts_where' );
 		add_filter( 'posts_where', $where_filter, 10, 2 );
-		$query = new \WP_Query( $query_vars );
+		$query = new WP_Query( $query_vars );
 		remove_filter( 'posts_where', $where_filter, 10, 2 );
 
 		if ( ! $query->have_posts() ) {

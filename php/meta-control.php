@@ -1,7 +1,5 @@
 <?php
 
-namespace Settings_Revisions;
-
 require_once ABSPATH . WPINC . '/class-wp-customize-control.php';
 
 /**
@@ -10,7 +8,7 @@ require_once ABSPATH . WPINC . '/class-wp-customize-control.php';
  * @package WordPress
  * @subpackage Customize
  */
-class Meta_Control extends \WP_Customize_Control {
+class Settings_Revisions_Meta_Control extends WP_Customize_Control {
 	public $plugin;
 
 	/**
@@ -32,11 +30,11 @@ class Meta_Control extends \WP_Customize_Control {
 	 * @uses WP_Customize_Control::__construct()
 	 *
 	 * @param Plugin $plugin
-	 * @param \WP_Customize_Manager $manager
+	 * @param WP_Customize_Manager $manager
 	 * @param string $id
 	 * @param array $args
 	 */
-	function __construct( Plugin $plugin, \WP_Customize_Manager $manager, $id, $args = array() ) {
+	function __construct( Settings_Revisions_Plugin $plugin, WP_Customize_Manager $manager, $id, $args = array() ) {
 		$this->plugin = $plugin;
 		parent::__construct( $manager, $id, $args );
 		add_action( 'customize_controls_enqueue_scripts', array( $this, 'enqueue_deps' ) );

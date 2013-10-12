@@ -1,8 +1,6 @@
 <?php
 
-namespace SettingsRevisions;
-
-class DataBasicTest extends \WP_UnitTestCase {
+class DataBasicTest extends WP_UnitTestCase {
 
 	function testAddition() {
 
@@ -36,7 +34,7 @@ class DataBasicTest extends \WP_UnitTestCase {
 		$this->assertTrue( is_int( $post_id ) );
 
 		$post = get_post( $post_id );
-		$this->assertTrue( $post instanceof \WP_Post );
+		$this->assertTrue( $post instanceof WP_Post );
 		$this->assertEquals( $post->post_title, $comment );
 
 		$settings = $plugin->post_type->get_revision_settings( $post );

@@ -1,5 +1,3 @@
 <?php
 
-namespace Settings_Revisions;
-
-class Exception extends \Exception {}
+class Settings_Revisions_Exception extends Exception {}

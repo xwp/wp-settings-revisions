@@ -268,7 +268,7 @@ class Post_Type {
 		remove_filter( 'posts_where', $where_filter, 10, 2 );
 
 		if ( ! $query->have_posts() ) {
-			return false;
+			return sprintf( '<option value="">%s</option>', esc_html__( 'Default Settings', 'settings-revisions' ) );
 		}
 
 		ob_start();

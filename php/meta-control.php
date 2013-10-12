@@ -89,14 +89,9 @@ class Meta_Control extends \WP_Customize_Control {
 		?>
 
 		<label>
-			<span class="customize-control-title"><?php echo esc_html_e( 'Active Revision:', 'settings-revisions' ) ?></span>
+			<span class="customize-control-title"><?php esc_html_e( 'Active Revision:', 'settings-revisions' ) ?></span>
 			<select class="active">
-				<?php $options = $this->plugin->post_type->get_dropdown_contents( $query_vars ) ?>
-				<?php if ( $options ) : ?>
-					<?php echo $options; // xss ok ?>
-				<?php else : ?>
-					<option value=""><?php esc_html_e( 'Default Settings', 'settings-revisions' ) ?></option>
-				<?php endif; ?>
+				<?php echo $this->plugin->post_type->get_dropdown_contents( $query_vars ); // xss ok ?>
 			</select>
 		</label>
 

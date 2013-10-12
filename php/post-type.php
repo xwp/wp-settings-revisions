@@ -5,10 +5,10 @@ namespace Settings_Revisions;
 class Post_Type {
 	const SLUG        = 'settings-revision';
 	const META_BOX_ID = 'settings-revision-options';
-	//const DEFAULT_PUBLISH_CAPABILITY = 'manage_network_options'; // @todo pending
 	public $plugin    = null;
 	public $l10n      = array();
 
+	//const DEFAULT_PUBLISH_CAPABILITY = 'manage_network_options'; // @todo pending
 	/**
 	 * @todo Show UI but prevent editing or creating new posts; only use admin as way to view posts, and trash or maybe set active settings
 	 */
@@ -71,13 +71,14 @@ class Post_Type {
 	 * @return array|null
 	 */
 	function get_active_post() {
-		$posts = get_posts( array(
+		$query_vars = array(
 			'post_type'      => self::SLUG,
 			'post_status'    => 'publish',
 			'posts_per_page' => 1,
 			'orderby'        => 'date',
 			'order'          => 'DESC',
-		) );
+		);
+		$posts = get_posts( $query_vars );
 		return array_shift( $posts );
 	}
 
@@ -94,6 +95,7 @@ class Post_Type {
 	}
 
 	/**
+	 * @param int|object|WP_Post [$post]
 	 * @return array|null
 	 */
 	function get_revision_settings( $post = null ) {
@@ -125,17 +127,19 @@ class Post_Type {
 	}
 
 	/**
+	 * @param array [$args]
 	 * @throws Exception
 	 * @return int
 	 */
 	function save_revision_settings( $args = array() ) {
-		$args = wp_parse_args( $args, array(
+		$defaults = array(
 			//'post_id' => null, // @todo pending
 			'comment' => '',
 			//'is_pending' => false, // @todo pending
 			//'scheduled_date' => null, // @todo future
 			'settings' => array(),
-		));
+		);
+		$args = wp_parse_args( $args, $defaults );
 
 		// Force pending status if they don't have the permissions to publish
 		//$can_publish_settings = current_user_can( $this->get_publish_capability() );
@@ -238,14 +242,15 @@ class Post_Type {
 	 * Get a list of <option> elements containing the settings-revision posts
 	 */
 	public function get_dropdown_contents( $query_vars = array() ) {
-		$query_vars = wp_parse_args( $query_vars, array(
+		$defaults = array(
 			'post_type'      => Post_Type::SLUG,
 			'post_status'    => array( 'publish', ), // @todo pending and future
 			'after_post_id'  => null,
 			'before_post_id' => null,
 			'orderby'        => 'date',
 			'order'          => 'DESC',
-		));
+		);
+		$query_vars = wp_parse_args( $query_vars, $defaults );
 
 		$where_filter = function ( $where, $query ) {
 			global $wpdb;
@@ -267,9 +272,9 @@ class Post_Type {
 		}
 
 		ob_start();
-		while( $query->have_posts() ) {
+		while ( $query->have_posts() ) {
 			$query->the_post();
-			echo $this->_get_the_revision_select_option_html();
+			echo $this->_get_the_revision_select_option_html(); // xss ok
 		}
 		wp_reset_postdata();
 		return ob_get_clean();
@@ -306,7 +311,7 @@ class Post_Type {
 			$tpl_vars = array(
 				'{date}'    => get_the_time( get_option( 'date_format' ) ),
 				'{time}'    => get_the_time( get_option( 'time_format' ) ),
-				'{author}'  =>  sprintf(
+				'{author}'  => sprintf(
 					( $is_dual_authorship ? $this->l10n['dual_authorship_label'] : $this->l10n['sole_authorship_label'] ),
 					$author,
 					$modified_author

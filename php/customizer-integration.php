@@ -47,10 +47,13 @@ class Customizer_Integration {
 		global $wp_customize;
 
 		$section_name = 'settings-revisions';
-		$wp_customize->add_section( $section_name, array(
-			'title'    => __( 'Settings Revisions', 'settings-revisions' ),
-			'priority' => 1,
-		) );
+		$wp_customize->add_section(
+			$section_name,
+			array(
+				'title'    => __( 'Settings Revisions', 'settings-revisions' ),
+				'priority' => 1,
+			)
+		);
 
 		$wp_customize->add_setting(
 			'settings_revision_meta',
@@ -60,17 +63,16 @@ class Customizer_Integration {
 				'type'      => 'custom', // not a theme_mod or an option
 			)
 		);
-		$wp_customize->add_control(
-			new Meta_Control(
-				$this->plugin,
-				$wp_customize,
-				'settings_revision_meta',
-				array(
-					'section'  => $section_name,
-					'settings' => 'settings_revision_meta',
-				)
+		$control = new Meta_Control(
+			$this->plugin,
+			$wp_customize,
+			'settings_revision_meta',
+			array(
+				'section'  => $section_name,
+				'settings' => 'settings_revision_meta',
 			)
 		);
+		$wp_customize->add_control( $control );
 
 	}
 
@@ -88,7 +90,7 @@ class Customizer_Integration {
 			'settings' => array(),
 		);
 
-		foreach ($manager->settings() as $setting) {
+		foreach ( $manager->settings() as $setting ) {
 			if ( in_array( $setting->type, array( 'theme_mod', 'option' ) ) ) {
 				$args['settings'][] = array(
 					'id'    => $setting->id,
@@ -112,7 +114,7 @@ class Customizer_Integration {
 		if ( isset( $_REQUEST['before_post_id'] ) && is_numeric( $_REQUEST['before_post_id'] ) ) {
 			$args['before_post_id'] = (int)$_REQUEST['before_post_id'];
 		}
-		echo $this->plugin->post_type->get_dropdown_contents( $args );
+		echo $this->plugin->post_type->get_dropdown_contents( $args ); // xss ok
 		exit;
 	}
 }

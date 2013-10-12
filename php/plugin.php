@@ -84,7 +84,7 @@ class Plugin {
 	 */
 	function get_meta_data( $key = null ) {
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		$data = get_plugin_data(PLUGIN_FILE);
+		$data = get_plugin_data( PLUGIN_FILE );
 		if ( ! is_null( $key ) ) {
 			return $data[$key];
 		} else {

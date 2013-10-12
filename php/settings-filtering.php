@@ -8,7 +8,7 @@ class Settings_Filtering {
 
 	function __construct( $args = array() ) {
 		$args = wp_parse_args( $args, get_object_vars( $this ) );
-		foreach ($args as $key => $value) {
+		foreach ( $args as $key => $value ) {
 			$this->$key = $value;
 		}
 
@@ -27,7 +27,7 @@ class Settings_Filtering {
 			return;
 		}
 
-		foreach( $active_settings as $setting ) {
+		foreach ( $active_settings as $setting ) {
 			$setting = (object)$setting;
 
 			// Parse the ID for array keys.
@@ -47,7 +47,7 @@ class Settings_Filtering {
 				return $self->multidimensional_replace( $original, $id_keys, $setting->value );
 			};
 
-			switch( $setting->type ) {
+			switch ( $setting->type ) {
 				case 'theme_mod' :
 					add_filter( 'theme_mod_' . $id_base, $filter );
 					break;
@@ -123,7 +123,7 @@ class Settings_Filtering {
 	 * @param $root
 	 * @param $keys
 	 * @param mixed $value The value to update.
-	 * @return
+	 * @return mixed
 	 */
 	final function multidimensional_replace( $root, $keys, $value ) {
 		if ( ! isset( $value ) )

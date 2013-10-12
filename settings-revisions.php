@@ -35,10 +35,11 @@ global $settings_revisions_plugin;
  * Activation handler wrapper
  */
 function _settings_revisions_activate_wrapper() {
-	_settings_revisions_boot( array(
+	$options = array(
 		'activation'      => true,
 		'activation_args' => func_get_args(),
-	));
+	);
+	_settings_revisions_boot( $options );
 }
 register_activation_hook( __FILE__, '_settings_revisions_activate_wrapper' );
 
@@ -70,10 +71,11 @@ function _settings_revisions_check_php_version( $die = false ) {
 function _settings_revisions_boot( $options = array() ) {
 	global $settings_revisions_plugin;
 
-	extract( wp_parse_args( $options, array(
+	$defaults = array(
 		'activation'      => false,
 		'activation_args' => array(),
-	)));
+	);
+	extract( wp_parse_args( $options, $defaults ) );
 
 	// Just in case database with plugin already activated is loaded onto a server with an old PHP version
 	if ( _settings_revisions_check_php_version( $activation ) ) {
@@ -111,7 +113,7 @@ add_action( 'plugins_loaded', '_settings_revisions_boot' );
  */
 function _settings_revisions_autoload( $class_name ) {
 	if ( preg_match( '/^Settings_Revisions\\\\(.+)/', $class_name, $matches ) ) {
-		$class_name = $matches[1];
+		$class_name    = $matches[1];
 		$file_basename = strtolower( str_ireplace( '_', '-', $class_name ) );
 		require_once __DIR__ . '/php/' . $file_basename . '.php';
 	}

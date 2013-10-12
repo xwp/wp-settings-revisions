@@ -9,7 +9,7 @@ class DataBasicTest extends \WP_UnitTestCase {
 		global $settings_revisions_plugin;
 		$plugin = $settings_revisions_plugin;
 
-		$admin_user = array_shift( get_users(array( 'role' => 'administrator' )) );
+		$admin_user = array_shift( get_users( array( 'role' => 'administrator' ) ) );
 		wp_set_current_user( $admin_user->ID );
 
 		$post = $plugin->post_type->get_active_post();
@@ -18,19 +18,20 @@ class DataBasicTest extends \WP_UnitTestCase {
 		$post = $plugin->post_type->get_revision_settings( null );
 		$this->assertNull( $post );
 
-		$comment = 'First revision setting blogname';
+		$comment  = 'First revision setting blogname';
 		$blogname = 'Hello World';
-		$theme = get_template();
-		$post_id = $plugin->post_type->save_revision_settings( array(
+		$theme    = get_template();
+		$revision = array(
 			'comment' => $comment,
 			'settings' => array(
 				array(
 					'id' => 'blogname',
 					'type' => 'option',
 					'value' => $blogname,
-				)
+				),
 			),
-		));
+		);
+		$post_id = $plugin->post_type->save_revision_settings( $revision );
 
 		$this->assertTrue( is_int( $post_id ) );
 

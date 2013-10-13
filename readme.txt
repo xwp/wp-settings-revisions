@@ -11,7 +11,7 @@ Keep revisions of changes to your settings in Theme Customizer, and preview roll
 
 == Description ==
 
-**Now compatible with PHP≥5.2!**
+***Now compatible with PHP≥5.2!***
 
 One of the greatest features of WordPress is the **Customizer** which allows you to change settings and preview them in real-time, all before you publish them for everyone to see. (Go ahead and click that big **Customize Your Site** button on your Dashboard!) But what if you make a change and want to go back in time to restore your previous settings? Changes to posts can be previewed ([mostly](http://core.trac.wordpress.org/ticket/20299)), and they have revisions which allow you to revert the current version to restore a previous one. *The same revision system is needed for settings.* This is what the Settings Revisions plugin implements.
 
@@ -35,6 +35,12 @@ You can access the Customizer by clicking the “Customize Your Site” button o
 8. Confirmation when restoring revision atop unsaved changes
 
 == Changelog ==
+
+= 0.2 =
+* Eliminate PHP 5.3 requirement by removing namespaces and closures ([#22](https://github.com/x-team/wp-settings-revisions/issues/22))
+* Fix PHP_CodeSniffer issues according to the [WordPress Coding Standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) ([#17](https://github.com/x-team/wp-settings-revisions/issues/16)), add to Travis and `pre-commit`
+* Add jshint to Travis and `pre-commit` hook ([#17](https://github.com/x-team/wp-settings-revisions/issues/17))
+* Improve pre-commit hook to optionally scan modified files
 
 = 0.1.3 =
 Fix handling of settings which contain PHP-serialized values; use `customize_controls_enqueue_scripts` action.

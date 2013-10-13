@@ -55,7 +55,7 @@ function _settings_revisions_boot( $options = array() ) {
 	);
 	$options = wp_parse_args( $options, $defaults );
 
-	$file = WP_PLUGIN_DIR . '/' . basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ );
+	$file = WP_PLUGIN_DIR . '/' . basename( __FILE__, '.php' ) . '/' . basename( __FILE__ );
 	define( 'SETTINGS_REVISIONS_PLUGIN_FILE', $file );
 	define( 'SETTINGS_REVISIONS_PLUGIN_DIR', dirname( $file ) );
 

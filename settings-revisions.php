@@ -81,6 +81,6 @@ function _settings_revisions_autoload( $class_name ) {
 	if ( preg_match( '/^Settings_Revisions_(.+)/', $class_name, $matches ) ) {
 		$class_name    = $matches[1];
 		$file_basename = strtolower( str_ireplace( '_', '-', $class_name ) );
-		require_once __DIR__ . '/php/' . $file_basename . '.php';
+		require_once dirname( __FILE__ ) . '/php/' . $file_basename . '.php';
 	}
 }

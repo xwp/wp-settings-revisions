@@ -16,6 +16,7 @@ class Settings_Revisions_Post_Type {
 			$this->$key = $value;
 		}
 		add_action( 'init', array( $this, 'register' ) );
+		add_action( 'admin_menu', array( $this, 'remove_add_new_menu' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 
 		$this->l10n = array(
@@ -46,6 +47,17 @@ class Settings_Revisions_Post_Type {
 				),
 				'register_meta_box_cb' => array( $this, 'add_meta_box' ),
 			)
+		);
+	}
+
+
+	/**
+	 * Remove "Add New" menu under Settings Revisions parent menu
+	 */
+	function remove_add_new_menu() {
+		remove_submenu_page(
+			'edit.php?post_type=settings-revision',
+			'post-new.php?post_type=settings-revision'
 		);
 	}
 

@@ -24,7 +24,7 @@ You can access the Customizer by clicking the “Customize Your Site” button o
 
 **Development of this plugin is done [on GitHub](https://github.com/x-team/wp-settings-revisions). Pull requests welcome. Please see [issues](https://github.com/x-team/wp-settings-revisions/issues) reported there before going to the plugin forum.**
 
-[![Build Status](https://travis-ci.org/x-team/wp-settings-revisions.png)](https://travis-ci.org/x-team/wp-settings-revisions)
+[![Build Status](https://travis-ci.org/x-team/wp-settings-revisions.png?branch=master)](https://travis-ci.org/x-team/wp-settings-revisions)
 
 ## Screenshots ##
 

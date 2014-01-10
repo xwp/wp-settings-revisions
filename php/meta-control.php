@@ -52,7 +52,7 @@ class Settings_Revisions_Meta_Control extends WP_Customize_Control {
 		wp_enqueue_script(
 			'settings-revisions-meta-control',
 			$this->plugin->get_plugin_path_url( 'js/meta-control.js' ),
-			array( 'jquery', 'customize-controls' ),
+			array( 'jquery', 'underscore', 'customize-controls' ),
 			$this->plugin->get_version()
 		);
 		wp_enqueue_style(

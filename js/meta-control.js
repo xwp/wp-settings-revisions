@@ -1,5 +1,5 @@
-/*global jQuery, wp, SettingsRevisionsMetaControl_exported, confirm */
-
+/*global jQuery, wp, SettingsRevisionsMetaControl_exported, confirm, _ */
+/*exported SettingsRevisionsMetaControl */
 var SettingsRevisionsMetaControl = (function ($) {
 	'use strict';
 
@@ -66,8 +66,8 @@ var SettingsRevisionsMetaControl = (function ($) {
 				has_mutated_since_snapshot_restore = false;
 				$.each(settings, function (key, value) {
 					var id = key.replace(/^(theme_mod|option)_/, '');
-					if (wp.customize.has(id)) {
-						wp.customize.value(id)(value);
+					if ( wp.customize.has( id ) && ! _( value ).isEqual( wp.customize.value( id )() ) ) {
+						wp.customize.value( id )( value );
 					}
 				});
 				is_restoring_snapshot = false;

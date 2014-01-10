@@ -69,11 +69,30 @@ class Settings_Revisions_Post_Type {
 	//}
 
 	/**
+	 * Create postmeta key out of a $type and $id
 	 *
+	 * @param $type
+	 * @param $id
+	 * @return string
 	 */
 	static function format_post_meta_key( $type, $id ) {
 		assert( in_array( $type, array( 'theme_mod', 'option' ) ) );
 		return sprintf( '%s_%s', $type, $id );
+	}
+
+	/**
+	 * Parse a postmeta key into its id and type
+	 *
+	 * @param $key
+	 * @return bool|array
+	 */
+	static function parse_post_meta_key( $key ) {
+		if ( ! preg_match( '/^(option|theme_mod)_(.+)/', $key, $matches ) ) {
+			return false;
+		}
+		$type = $matches[1];
+		$id   = $matches[2];
+		return compact( 'id', 'type' );
 	}
 
 	/**
@@ -114,12 +133,12 @@ class Settings_Revisions_Post_Type {
 			return null;
 		}
 		$settings = array();
-		foreach ( get_post_custom( $post->ID ) as $key => $values ) {
-			$value = array_shift( $values );
-			if ( preg_match( '/^(option|theme_mod)_(.+)/', $key, $matches ) ) {
-				$type = $matches[1];
-				$id = $matches[2];
-				$settings[] = compact( 'id', 'type', 'value' );
+		foreach ( get_post_custom_keys( $post->ID ) as $key ) {
+			$key_info = self::parse_post_meta_key( $key );
+			if ( $key_info ) {
+				$value = get_post_meta( $post->ID, $key, true );
+				$value = maybe_unserialize( $value );
+				$settings[] = array_merge( $key_info, compact( 'value' ) );
 			}
 		}
 		return $settings;
@@ -180,7 +199,7 @@ class Settings_Revisions_Post_Type {
 				add_post_meta(
 					$post_id,
 					self::format_post_meta_key( $setting['type'], $setting['id'] ),
-					$setting['value']
+					wp_slash( serialize( $setting['value'] ) )
 				);
 			}
 		}
@@ -303,8 +322,27 @@ class Settings_Revisions_Post_Type {
 	protected function _get_the_revision_select_option_html( $default_selected = false ) {
 		ob_start();
 		$settings = array();
-		foreach ( get_post_custom() as $key => $values ) {
-			$settings[$key] = maybe_unserialize( array_shift( $values ) );
+		foreach ( $this->get_revision_settings( get_the_ID() ) as $setting ) {
+			$id = $setting['id'];
+			$type = $setting['type'];
+			$value = $setting['value'];
+			$mock_customize_setting = (object) compact( 'id', 'type' ); // because customizer is not loaded, we can't $wp_customize->get_setting( $id )
+			$value = apply_filters( "customize_sanitize_js_{$id}", $value, $mock_customize_setting );
+			/**
+			 * What happens in the case that a setting was not registered? How can we sanitize the JS value?
+			 * Widget Customizer, for example, needs to convert PHP arrays into a serialized representation
+			 * that can be manipulated via JS in the customizer. To do this, we register a sanitize_js_callback
+			 * when adding the setting. But what if an old settings revision contains a widget which
+			 * has since been deleted? What if we wanted to restore that widget? We can re-create the setting
+			 * on the front-end with JS, but we wouldn't have the JS-sanitized setting to populate into the
+			 * setting. So instead of dumping out all settings up-front, we may need to grab them later
+			 * via Ajax once an old setting is selected. In the mean time, we can get around this
+			 * via a temp_customize_sanitize_js filter.
+			 */
+			// @todo if _get_the_revision_select_option_html() is invoked over Ajax, then the temp_customize_sanitize_js filter is not yet added!
+			$value = apply_filters( 'temp_customize_sanitize_js', $value, $mock_customize_setting );
+			$key = sprintf( '%s_%s', $type, $id );
+			$settings[$key] = $value;
 		}
 		$author             = get_the_author();
 		$modified_author    = get_the_modified_author();
@@ -325,14 +363,11 @@ class Settings_Revisions_Post_Type {
 			<?php selected( $default_selected ) ?>
 			>
 			<?php
+			$author_tpl = ( $is_dual_authorship ? $this->l10n['dual_authorship_label'] : $this->l10n['sole_authorship_label'] );
 			$tpl_vars = array(
 				'{date}'    => get_the_time( get_option( 'date_format' ) ),
 				'{time}'    => get_the_time( get_option( 'time_format' ) ),
-				'{author}'  => sprintf(
-					( $is_dual_authorship ? $this->l10n['dual_authorship_label'] : $this->l10n['sole_authorship_label'] ),
-					$author,
-					$modified_author
-				),
+				'{author}'  => sprintf( $author_tpl, $author, $modified_author ),
 				'{comment}' => get_the_title(),
 			);
 			$option_text = str_replace(

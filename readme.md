@@ -5,8 +5,8 @@ Keep revisions of changes to your settings in Theme Customizer, and preview roll
 
 **Contributors:** [x-team](http://profiles.wordpress.org/x-team), [westonruter](http://profiles.wordpress.org/westonruter), [kucrut](http://profiles.wordpress.org/kucrut)  
 **Tags:** [customizer](http://wordpress.org/plugins/tags/customizer), [customize](http://wordpress.org/plugins/tags/customize), [options](http://wordpress.org/plugins/tags/options), [settings](http://wordpress.org/plugins/tags/settings), [theme-mods](http://wordpress.org/plugins/tags/theme-mods), [revisions](http://wordpress.org/plugins/tags/revisions), [versioning](http://wordpress.org/plugins/tags/versioning), [revert](http://wordpress.org/plugins/tags/revert), [styles](http://wordpress.org/plugins/tags/styles)  
-**Requires at least:** 3.5  
-**Tested up to:** 3.6.1  
+**Requires at least:** 3.7  
+**Tested up to:** 3.8  
 **Stable tag:** trunk (master)  
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
 

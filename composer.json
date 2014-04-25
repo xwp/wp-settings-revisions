@@ -1,6 +1,6 @@
 {
 	"name"       : "x-team/wp-settings-revisions",
-	"description": "Keep revisions of changes to your settings in Theme Customizer, and preview rollbacks to their previous states."
+	"description": "Keep revisions of changes to your settings in Theme Customizer, and preview rollbacks to their previous states.",
 	"homepage"   : "http://wordpress.org/plugins/settings-revisions/",
 	"type"       : "wordpress-plugin",
 	"license"    : "GPL-2.0+",

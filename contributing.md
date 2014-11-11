@@ -19,5 +19,5 @@ We have to integrate the PHPCS checks with Travis CI (see [#16][3]).
 
 [1]: http://wp-cli.org/blog/plugin-unit-tests.html
 [2]: https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards
-[3]: https://github.com/x-team/wp-settings-revisions/issues/16
+[3]: https://github.com/xwp/wp-settings-revisions/issues/16
 [4]: http://wp-cli.org/

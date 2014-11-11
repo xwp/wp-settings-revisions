@@ -1,18 +1,18 @@
 <?php
 /**
  * Plugin Name: Settings Revisions
- * Plugin URI:  http://github.com/x-team/wp-settings-revisions
+ * Plugin URI:  http://github.com/xwp/wp-settings-revisions
  * Description: Keep revisions of changes to your settings, including Theme Customizer changes. Allow rollbacks to previous revisions, and editorial flow publishing changes.
  * Version:     0.3
- * Author:      X-Team
- * Author URI:  http://x-team.com/
+ * Author:      XWP
+ * Author URI:  https://xwp.co/
  * License:     GPLv2+
  * Text Domain: settings-revisions
  * Domain Path: /locale
  */
 
 /**
- * Copyright (c) 2013 X-Team (http://x-team.com/)
+ * Copyright (c) 2013 XWP (https://xwp.co/)
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License, version 2 or, at
